@@ -1,0 +1,12 @@
+
+logging vs monitoring
+
+alternatives to prometheus:
+- cAdvisor (individual containers)
+- Heapster (collect from kubelet)
+- Prometheus (generic pull-based time-series capture, storage, and alerting service with kubernetes integration)
+
+kubectl get svc
+- prometheus-main
+
+

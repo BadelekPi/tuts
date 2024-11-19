@@ -1,0 +1,55 @@
+Representational State Transfer and Application Programming Interface
+
+Loaded all components for the first time when site are loaded (with JS, CSS, HTML resource), then send URI (Universal Resource Indentifier) request for a web resource, representating the next state of the application.
+
+URI - compact sequence of characters identifies and abstract or physical resource
+np. ftp://myserver.dev/files/docs/sript.docx
+URL - Universal Resource Locator - subset of URI, also explains how to acces to resource, providing method like http, https
+
+REST APIs Contraints
+1. Client-server architecture
+2. Statelessness
+3. Cacheability - storing responses for a set period of time
+4. Layered system
+5. Code on demand
+6. Uniform interface
+6.1 Resource identification in request - URI must specify resource and format of response
+6.2 Resource manipulation through representations
+6.3 Self-descriptive messages
+6.4 Hypermedia as the engine of application - client should be able to discover all available resources and methods, REST service describes its own use with evey returned resource
+
+        |--------------------URN-----------------|
+|------------------URL--------------------|resource|
+https://thinkarahatke.com/author/amty.html/#posts
+|--------------------URI-------------------------|
+
+------------------------------------
+		HTTP
+------------------------------------
+Hyper-text transfer protocol
+Not all Rest APIs use HTTP protocol, byt the RESTful ones do
+
+RESTful API - REST service runs om the web over HTTP to give acces to a web resource
+
+-----------------------------------
+		Methods
+-----------------------------------
+
+GET - get data from the resource (200, 404)
+POST - create new resources (201, 409, 404)
+PUT - update data up the existing resource (200, 401, 404, 405)
+PATCH - modify existing resource (200, 401, 404, 405)
+DELETE - delete specife resource (200, 401, 404)
+OPTIONS - returns description communication methods
+HEAD - head section of that response
+
+
+----------------------------------
+	  Status codes
+----------------------------------
+
+1xx Information
+2xx Success
+3xx Redicrection
+4xx Client Error
+5xx Server Error

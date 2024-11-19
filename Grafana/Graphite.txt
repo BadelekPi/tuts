@@ -1,0 +1,107 @@
+Graphite:
+- stores numerical time-series data
+- ability to graph data in real time
+
+Componenets:
+1. Carbon - metrics listener daemon, carbon-cache, twist in python framework
+2. Whisper - on the underlying file system, db for storing time-series data
+3. Graphite-web - Django web application
+
+---------
+Install |
+---------
+sudo apt-get -y install graphite-web graphite-carbon
+sudo apt-get -y install postgresql libpq-dev python-psycopg2
+
+-------
+Setup |
+-------
+Create postgres User:
+CREATE USER graphite WITH PASSWORD 'password';
+
+CREATE DATABASE graphite WITH OWNER graphite;
+
+Exit:
+\q
+
+sudo vim /etc/graphite/local_settings.py
+
+under Additional Django commands:
+
+SECRET_KEY = 'test-secret-key'
+TIME_ZONE = 'Europe/Warsaw'
+USE_REMOTE_USER_AUTHENTICATION = True
+DATABASES= {
+        'default': {
+            'NAME': 'graphite',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'USER': 'graphite',
+            'PASSWORD': 'password',
+            'HOST': '127.0.0.1',
+            'PORT': ''
+
+
+Sync database:
+sudo graphite-manage migrate auth
+
+
+--------------------------------
+Carbon overview
+--------------------------------
+- defines retention rates for storing metrics
+- matches metric paths to patterns (rules)
+- tells whisper what frequency and history of datapoints to store
+
+sudo -s
+vim /etc/carbon/carbon.conf
+vim /etc/carbon/storage-schemas.conf
+
+sudo cp /usr/share/doc/graphite-carbon/examples/storage-aggregation.conf.example /etc/carbon/storage-schemas.conf
+
+----------------------
+Configure Graphite web
+----------------------
+
+sudo apt-get -y install apache2
+sudo apt-get install libapache2-mod-wsgi-py3
+
+Tell apache how to route traffic to Graphite Web:
+sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available/
+sudo a2dissite 000-default
+sudo a2ensite apache2-graphite
+
+------------------------------------------------------------------------------------
+
+Whisper files
+- how carbon writes to whisper files
+- calculation filesystem needs
+
+-receive a metric
+- presence of existing metric, if doesnt fit create new rule
+- check rules in storage-schema's configuration file, locates an associated retention cofniguration and uses those settings to create database
+- whisper prepopulates data with a null datapoint fir each predetermined interval
+- when new data are received, these null datapoints are replaced
+
+Check status of Carbon:
+sudo netstat -tulpn | grep 2003
+
+echo "email_sending.emails.sent 300 $(date +Zs)" | nc localhost 2003
+
+sudo docker run -d -p 80:80 -p 2003-2004:2003-2004 -p 2023-2024:2023-2024 -p 8125:8125/udp graphiteapp/graphite-statsd
+
+python statsd_script.py
+
+
+------------------------
+
+Graphite render endpoint
+- served by graphite-web, the frontend component
+- returning raw metric data, accepts various arguments via query string params
+these params are separated by ampersands: /render?name=value&name=value
+
+Execute python script, then go to webbrowser and type url:
+http://localhost/render?from=-10minuntil=now&target=stats.statsd.sleep_calls
+
+To display query in JSON format:
+http://localhost/render?from=-10minuntil=now&target=stats.statsd.sleep_calls&format=json
+

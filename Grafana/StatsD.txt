@@ -1,0 +1,76 @@
+StatsD - network daemon for application metrics collection
+- client sends data to server daemon over UDP - User datagram protocol
+- client avaiable in virtually every language
+
+
+- Each metric is its own bucket
+- value provided by the metric is stored
+- at flush, stats are aggregated and sent to an upstream backend service
+
+Install StatsD (typical installation of daemon for production)
+sudo apt-get -y install git nodejs devscripts debhelper npm dh-systemd 
+# dh-systemd are removed from bullseye, problem with installation
+git clone https://github.com/etsy/statsd.git
+sudo dpkg-buildpackage
+sudo dpkg -i statsd_0.8.0-1_all.deb
+sudo systemctl status statsd.service
+sudo systemctl start statsd.service
+sudo systemctl stop statsd.service
+sudo -s
+vim /etc/statsd/localconfig.js
+
+type:
+	debug: "True"
+	, port: 8125
+	}
+
+start service again
+
+echo "foo:1lc" | nc -u -w0 127.0.0.1 8125
+
+
+Types of metrics:
+<bucket>:<value>|<metric_type>
+- counters
+- timer
+- gauges
+- sets
+
+Counter:
+- increment/decrement the value of the bucket
+email_sending.emails.sent:300|c
+	{bucket}        {value} {counter}
+
+Timer:
+- how long somehing took to complete
+email_sending.render.recommendations:560|ms
+	{bucket}                 {value} {time denotes timer}
+
+Gauge:
+- arbitary values to be recorded
+- sign to change the value +/-
+- are not automatically reset on a per-flush basis
+email_sending.render.num_recommendations:+5|g
+	{bucket}		    {value} {gauge}
+
+Sampling:
+- send data to the stats server at the rate of X
+email_sending.render.recommendations:560|ms|@0.1
+					    {sampling_rate}
+
+
+
+Execute docker container:
+sudo docker run -id -p 8000:8000 -p 3000:3000 -p 8125:8125/udp grafana_graphite
+
+docker ps
+sudo pip install statsd
+
+in python script:
+
+HOST = 'localhost'
+PORT = 8125
+
+client = statsd.StatsClient(HOST, PORT)
+client.incr('statsd_script.sleep_calls')
+

@@ -1,0 +1,190 @@
+Dynamic testing - if a system or component is under test
+
+
+Static testing - if a system isnt directly being used as part of testing.
+Test specification, requirements, epics, user stories, code, user guides
+
+Testing - shows failures caused by defedcts in soft
+Debuging - finds, analyzes, and fixes issues
+
+Quality managment - quality assurance is typically focused on the adherence to proper processes in order to provide confidence. Quality Assurence is concerned with the proper execution of the entire process, quality assurence supports proper testing. 
+
+Seven principles of testing:
+- testing shows the presence of defects, not their absence
+- exhaustive testing is imposssible
+- early testing saves time and money
+- defects cluster together
+- beware of the pesticide paradox (same tests over and over doesnt find bugs)
+(except regression testing where is relatively low number of regression defects)
+- testing is context depending
+- the absence of errors is fallacy
+
+Test process factors:
+- SDLC model
+- test level
+- product and project risks
+- business domain
+- operational constraints
+- organizational polities
+- internal/external standards
+
+Test process activities:
+- test planning
+- test monitoring&control (both supported by evaluation of exit criteria)
+- test design
+- test implementation
+- test execution
+- test completion
+
+Ways how to report defects found by testing:
+- collaboration rather than battles
+- remind people about the common goal
+- emphasize testing and finding defects sooner
+- communicate using neutrality
+- be empathetic
+- confirm understanding
+
+SDLC: Software Development Life Cycle
+- Coding
+- Designing
+- Defining
+- Analysis
+- Maintenance
+- Testing
+
+Common software life cycle models:
+- sequential
+- iterative
+
+Sequential - linear sequential flow of activities
+V model - integrate test process throughout the development process, implementing the principle of early testing, futher the V model integrate the test levels
+
+Dev - Plan, Code, Build, Test
+Ops - Release, Deploy, Operate, Monitor
+
+Test levels:
+- Component testing (development env)
+- Integration testing (integration between components)
+- System testing
+- Acceptance testing (preferred production like test environment)
+
+Functional testing
+- the functions are what the system should do
+- consider the behaviour of the software
+- test component/system
+- may involve special skills
+
+Non-functional testing
+- characterisitics of systems, software such as performance
+- tests how well the system behaves
+- nonfunctional testing should be performed at all levels and early
+
+White Box testing
+- internal structure of the system
+- may include code
+- may require knowledge, skills
+
+Change Related Testing
+- change the system from a fix, upgrade, feature
+- confirmation testing
+- regression testing
+
+
+------------------
+Black box testing |
+------------------
+
+Behavioral testing, based on documentation, concentrate of input/outputs, no reference to internal structure
+- boundary value analysis (negative, positive range of values)
+- decision-table testing
+- use-case testing
+
+-----------------
+White box testing|
+-----------------
+
+Based on architecture, code, internal structure.
+Covered measured on items tested within a selected structure.
+
+- component state testing
+
+---------------------------
+Experience-Based Techniques|
+---------------------------
+
+Leverage experience of multiple project members, often combined with white/black box testing. 
+Test basis derived from testers, developers other stakeholders.
+
+- error guessing
+
+
+-----------------------
+
+Test management
+
+- independent testers are likely to recognize different failures, verify or disprove assumptions
+- lack of colaboration due to independency
+
+Test managers: develop or review test policy, plan test activites, write test plan, coordinate test plans, monitor progress 
+Testers: review, contribute test plans, assess requirements, identify documents, verify test env's, design test cases
+
+
+Test strategy types:
+- analytical
+- model-based
+- methodical
+- process compliant (industry specific standards)
+- directed (by stakeholders for example)
+- reactive
+
+Entry criteria:
+- availability of testable requirements, user stories, models
+- test items that have met the exit criteria for any prior test levels
+- avaiability of test environment, necessary test tools, test data and other resources
+
+
+Test control actions:
+- reprioritazing tests
+- changing the test schedule
+- adequecy of the test approach
+- effectiveness of the test activites with respect to the objectives
+
+Test Metrics Include
+- percentage of planned work done in test case preparation
+- percentage of planned work done in test environment preparation
+- test case execution
+- test coverage of requirements, user stories, acceptance critera, risks, code
+
+Test progress reports:
+- the status of the test activities and progress against the test plan
+- factors impeding progress
+- testing planned for the next reporting period
+- the quality of the test object
+
+Test summary reports:
+- summary of testing performed
+- information on what occured during a test period
+- deviations from plan
+- status of testing and product quality
+- factors that have blocked progress
+- metrics of defects, test cases, test coverage, activity progress
+- risks
+
+
+Product Risk, Project risks, Technical risks, organizational risks, Politcal risks
+
+Defect Report:
+- ID
+- title and summary
+- date
+- environment and test item
+- life-cycle phase
+- description
+- scope or degree of impact
+- urgency
+- state of the defect report
+- conclusions
+- change history
+- references
+
+

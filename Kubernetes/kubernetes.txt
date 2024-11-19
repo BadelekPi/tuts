@@ -1,0 +1,4 @@
+Minimum 3 hosts to create a claster
+It's possible to changing hosts between each other in case of some malfunctions
+
+

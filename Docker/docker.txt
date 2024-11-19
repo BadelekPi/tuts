@@ -1,0 +1,7 @@
+# List all of using ports:
+sudo lsof -i -P -n | grep <port_number>
+
+# Remove all containers:
+sudo docker rm -fv $(docker ps -aq)
+
+
